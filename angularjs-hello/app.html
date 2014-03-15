@@ -18,10 +18,13 @@
 	<div ng-controller="MainCtrl">
 		<div class="span4 sidebar-content">
 			<h2>Stories</h2>
-			<div class="story" ng-repeat="story in stories"
-				ng-click="setCurrentStory(story)">
-				<h4>{{story.title}}</h4>
-				<p>{{story.description}}</p>
+			<div id="column01" class="small-12 large-2 columns" ng-repeat="status in statuses">
+			<h3>{{status.name}}</h3>
+				<article class="large-12 columns story" ng-repeat="story in stories | filter:status.name"
+					ng-click="setCurrentStory(story)">
+					<h4>{{story.title}}</h4>
+					<p>{{story.description}}</p>
+				</article>
 			</div>
 		</div>
 		<br /> <a class="btn" ng-click="createStory()"><i
@@ -42,14 +45,16 @@
 					<label class="control-label" for="inputStatus">Status</label>
 					<div class="controls">
 						<select id="inputStatus" ng-model="currentStatus"
-							ng-options="s.name for s in statuses" ng-change="setCurrentStatus(currentStatus)"></select>
+							ng-options="s.name for s in statuses"
+							ng-change="setCurrentStatus(currentStatus)"></select>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="inputType">Type</label>
 					<div class="controls">
 						<select id="inputType" ng-model="currentType"
-							ng-options="t.name for t in types" ng-change="setCurrentType(currentType)"></select>
+							ng-options="t.name for t in types"
+							ng-change="setCurrentType(currentType)"></select>
 					</div>
 				</div>
 				<div class="control-group">
