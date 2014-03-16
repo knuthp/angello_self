@@ -1,4 +1,10 @@
-var myModule = angular.module('Angello', []);
+var myModule = angular.module('Angello', ['ngResource']);
+
+myModule.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+}
+]);
 
 myModule.factory('angelloHelper', function() {
 	var buildIndex = function(source, property) {
@@ -13,7 +19,12 @@ myModule.factory('angelloHelper', function() {
 	};
 });
 
-myModule.factory('angelloModel', function() {
+myModule.factory('storyModel', ['$resource', function ($resource){
+	return $resource('http://127.0.0.1\\:4730/rest/story/:story');
+}]);
+
+
+myModule.factory('angelloModel', function($resource) {
 	var getStatuses = function() {
 		var tempArray = [ {
 			name : 'Back Log'
@@ -45,6 +56,14 @@ myModule.factory('angelloModel', function() {
 		}, ];
 		return tempArray;
 	};
+	
+	var Story = $resource('http://127.0.0.1\\:4730/rest/story/:story');
+
+	var myStories = [];
+	Story.query(function (stories) {
+		myStories = stories;
+		console.log(JSON.stringify(myStories));
+	});
 
 	var getStories = function() {
 		var tempArray = [ {
@@ -97,6 +116,7 @@ myModule.factory('angelloModel', function() {
 			reporter : 'knuthp',
 			assignee : 'Superman'
 		} ];
+		
 		return tempArray;
 	};
 	
@@ -107,11 +127,11 @@ myModule.factory('angelloModel', function() {
 	};
 });
 
-myModule.controller('MainCtrl', function($scope, angelloModel, angelloHelper) {
+myModule.controller('MainCtrl', function($scope, storyModel, angelloModel, angelloHelper) {
 	$scope.currentStory;
 	$scope.types = angelloModel.getTypes();
 	$scope.statuses = angelloModel.getStatuses();
-	$scope.stories = angelloModel.getStories();
+	$scope.stories = storyModel.query();
 	$scope.typesIndex = angelloHelper.buildIndex($scope.types, 'name');
 	$scope.statusesIndex = angelloHelper.buildIndex($scope.statuses, 'name');
 

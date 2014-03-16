@@ -5,6 +5,7 @@
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.js"></script>
 <script type="text/javascript" src="javascripts/app.js"></script>
 
 <link
@@ -18,9 +19,11 @@
 	<div ng-controller="MainCtrl">
 		<div class="span4 sidebar-content">
 			<h2>Stories</h2>
-			<div id="column01" class="small-12 large-2 columns" ng-repeat="status in statuses">
-			<h3>{{status.name}}</h3>
-				<article class="large-12 columns story" ng-repeat="story in stories | filter:status.name"
+			<div id="column01" class="small-12 large-2 columns"
+				ng-repeat="status in statuses">
+				<h3>{{status.name}}</h3>
+				<article class="large-12 columns story"
+					ng-repeat="story in stories | filter:status.name"
 					ng-click="setCurrentStory(story)">
 					<h4>{{story.title}}</h4>
 					<p>{{story.description}}</p>
