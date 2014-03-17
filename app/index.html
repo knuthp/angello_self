@@ -5,7 +5,8 @@
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.js"></script>
 <script type="text/javascript" src="javascripts/app.js"></script>
 
 <link
@@ -92,6 +93,10 @@
 					</div>
 				</div>
 
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary" ng-click="save(currentStory)">Save</button>
+					<button type="cancel" class="btn" ng-click="cancel()">Cancel</button>
+				</div>
 			</form>
 		</div>
 	</div>

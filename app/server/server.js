@@ -57,6 +57,8 @@ var getStories = function() {
 	return tempArray;
 };
 
+var stories = getStories();
+
 //Add headers
 app.use(function (req, res, next) {
 
@@ -85,7 +87,14 @@ app.get('/', function(req, res) {
 
 
 app.get('/rest/story', function (req, res) {
-	res.json(getStories());
+	res.json(stories);
 });
+
+app.post('/rest/story', function(req, res) {
+	console.log(req);
+//	stories.push(req.body);
+	res.send(200);
+});
+
 
 app.listen(process.env.PORT || 4730);

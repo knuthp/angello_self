@@ -57,73 +57,10 @@ myModule.factory('angelloModel', function($resource) {
 		return tempArray;
 	};
 	
-	var Story = $resource('http://127.0.0.1\\:4730/rest/story/:story');
-
-	var myStories = [];
-	Story.query(function (stories) {
-		myStories = stories;
-		console.log(JSON.stringify(myStories));
-	});
-
-	var getStories = function() {
-		var tempArray = [ {
-			title : 'Story 00',
-			description : 'Description pending.',
-			criteria : 'Criteria pending.',
-			status : 'To Do',
-			type : 'Feature',
-			reporter : 'knuthp',
-			assignee : 'Superman'
-		}, {
-			title : 'Story 01',
-			description : 'Description pending.',
-			criteria : 'Criteria pending.',
-			status : 'To Do',
-			type : 'Feature',
-			reporter : 'knuthp',
-			assignee : 'Superman'
-		}, {
-			title : 'Story 02',
-			description : 'Description pending.',
-			criteria : 'Criteria pending.',
-			status : 'To Do',
-			type : 'Feature',
-			reporter : 'knuthp',
-			assignee : 'Superman'
-
-		}, {
-			title : 'Story 03',
-			description : 'Description pending.',
-			criteria : 'Criteria pending.',
-			status : 'To Do',
-			type : 'Feature',
-			reporter : 'knuthp',
-			assignee : 'Superman'
-		}, {
-			title : 'Story 04',
-			description : 'Description pending.',
-			criteria : 'Criteria pending.',
-			status : 'To Do',
-			type : 'Feature',
-			reporter : 'knuthp',
-			assignee : 'Superman'
-		}, {
-			title : 'Story 05',
-			description : 'Description pending.',
-			criteria : 'Criteria pending.',
-			status : 'To Do',
-			type : 'Feature',
-			reporter : 'knuthp',
-			assignee : 'Superman'
-		} ];
-		
-		return tempArray;
-	};
 	
 	return {
 		getStatuses : getStatuses,
 		getTypes : getTypes,
-		getStories : getStories
 	};
 });
 
@@ -143,6 +80,14 @@ myModule.controller('MainCtrl', function($scope, storyModel, angelloModel, angel
 		$scope.currentType = $scope.typesIndex[story.type];
 	};
 
+	
+	$scope.save = function(story) {
+		storyModel.save(story, function(resp) {
+	        console.log("Response from POST: %j", resp);
+		});
+		console.log(JSON.stringify(story));
+		
+	};
 
 	$scope.createStory = function() {
 		$scope.stories.push({
