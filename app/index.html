@@ -7,8 +7,10 @@
 	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.js"></script>
-	<script src="bower_components/sugar/release/sugar-full.development.js"></script>
+<script src="bower_components/sugar/release/sugar-full.development.js"></script>
 <script type="text/javascript" src="javascripts/app.js"></script>
+<script
+	src="bower_components/jquery-ui/ui/minified/jquery-ui.custom.min.js"></script>
 
 <link
 	href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css"
@@ -21,19 +23,17 @@
 	<div ng-controller="MainCtrl">
 		<div class="span4 sidebar-content">
 			<h2>Stories</h2>
-			<div id="column01" class="small-12 large-2 columns"
-				ng-repeat="status in statuses">
+			<ul class="list" sortable ng-repeat="status in statuses">
 				<h3>{{status.name}}</h3>
-				<ul>
-				<li userstory class="large-12 columns story"
+				<li userstory class="story"
 					ng-repeat="story in stories | filter:status.name"
 					ng-click="setCurrentStory(story)">
-					<button type="button" class="close" ng-click="deleteStory(story.id);">x</button>
+					<button type="button" class="close"
+						ng-click="deleteStory(story.id);">x</button>
 					<h4>{{story.title}}</h4>
 					<p>{{story.description}}</p>
 				</li>
-				</ul>
-			</div>
+			</ul>
 		</div>
 		<br /> <a class="btn" ng-click="createStory()"><i
 			class="icon-plus"></i> </a>
@@ -98,7 +98,8 @@
 				</div>
 
 				<div class="form-actions">
-					<button type="submit" class="btn btn-primary" ng-click="save(currentStory)">Save</button>
+					<button type="submit" class="btn btn-primary"
+						ng-click="save(currentStory)">Save</button>
 					<button type="cancel" class="btn" ng-click="cancel()">Cancel</button>
 				</div>
 			</form>

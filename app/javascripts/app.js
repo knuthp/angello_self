@@ -30,6 +30,30 @@ myModule.directive('userstory', function(angelloModel) {
 	};
 });
 
+
+
+
+myModule.directive('sortable', function () {
+	var linker = function (scope, element, attrs) {
+		var status = scope.status.name;
+		element.sortable({
+			items : 'li',
+			connectWith: '.list',
+			receive : function (event, ui) {
+				var curScope = angular.element(ui.item).scope();
+				scope.$apply(function() {
+					curScope.story.status = status;
+				});
+			}
+		});
+	};
+	return {
+		restrict : 'A',
+		link : linker
+	};
+});
+
+
 myModule.factory('angelloHelper', function() {
 	var buildIndex = function(source, property) {
 		var tempArray = [];
@@ -117,7 +141,6 @@ myModule.controller('MainCtrl', function($scope, storyModel, angelloModel, angel
 		$scope.currentStory = story;
 		$scope.currentStatus = $scope.statusesIndex[story.status];
 		$scope.currentType = $scope.typesIndex[story.type];
-		console.log(JSON.stringify(story));
 	};
 
 	
