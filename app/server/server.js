@@ -5,6 +5,7 @@ var app = express();
 
 var getStories = function() {
 	var tempArray = [ {
+		id : 0,
 		title : 'Story 00',
 		description : 'Description pending.',
 		criteria : 'Criteria pending.',
@@ -13,6 +14,7 @@ var getStories = function() {
 		reporter : 'knuthp',
 		assignee : 'Gunhild'
 	}, {
+		id : 1,
 		title : 'Story 01',
 		description : 'Description pending.',
 		criteria : 'Criteria pending.',
@@ -21,6 +23,7 @@ var getStories = function() {
 		reporter : 'knuthp',
 		assignee : 'Gunhild'
 	}, {
+		id : 2,
 		title : 'Story 02',
 		description : 'Description pending.',
 		criteria : 'Criteria pending.',
@@ -30,6 +33,7 @@ var getStories = function() {
 		assignee : 'Gunhild'
 
 	}, {
+		id : 3,
 		title : 'Story 03',
 		description : 'Description pending.',
 		criteria : 'Criteria pending.',
@@ -38,6 +42,7 @@ var getStories = function() {
 		reporter : 'knuthp',
 		assignee : 'Gunhild'
 	}, {
+		id : 4,
 		title : 'Story 04',
 		description : 'Description pending.',
 		criteria : 'Criteria pending.',
@@ -46,6 +51,7 @@ var getStories = function() {
 		reporter : 'knuthp',
 		assignee : 'Gunhild'
 	}, {
+		id : 5,
 		title : 'Story 05',
 		description : 'Description pending.',
 		criteria : 'Criteria pending.',

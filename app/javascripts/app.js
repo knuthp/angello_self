@@ -7,7 +7,7 @@ myModule.config(['$httpProvider', function($httpProvider) {
 ]);
 
 
-myModule.directive('userstory', function() {
+myModule.directive('userstory', function(angelloModel) {
 	var linker = function (scope, element, attrs) {
 		element.mouseover(function() {
 			element.css({ 'opacity' : 0.9});
@@ -17,7 +17,10 @@ myModule.directive('userstory', function() {
 	};
 	
 	var controller = function ($scope) {
-		// Pending
+		$scope.deleteStory = function(id) {
+			console.log('Directive id: ' + id);
+			angelloModel.deleteStory(id);
+		};
 	};
 	
 	return {
@@ -45,7 +48,7 @@ myModule.factory('storyModel', ['$resource', function ($resource){
 }]);
 
 
-myModule.factory('angelloModel', function($resource) {
+myModule.factory('angelloModel', function(storyModel) {
 	var getStatuses = function() {
 		var tempArray = [ {
 			name : 'Back Log'
@@ -78,8 +81,23 @@ myModule.factory('angelloModel', function($resource) {
 		return tempArray;
 	};
 	
+	var stories = storyModel.query();
+
+	var getStories = function() {
+		return stories;
+	};
+	
+	var deleteStory = function (id) {
+		stories.remove(function(s) {
+			return s.id == id;
+		});
+		console.log('Delete story:' + id);
+	};
+	
 	
 	return {
+		getStories : getStories,
+		deleteStory : deleteStory,
 		getStatuses : getStatuses,
 		getTypes : getTypes,
 	};
@@ -89,7 +107,7 @@ myModule.controller('MainCtrl', function($scope, storyModel, angelloModel, angel
 	$scope.currentStory;
 	$scope.types = angelloModel.getTypes();
 	$scope.statuses = angelloModel.getStatuses();
-	$scope.stories = storyModel.query();
+	$scope.stories = angelloModel.getStories();
 	$scope.typesIndex = angelloHelper.buildIndex($scope.types, 'name');
 	$scope.statusesIndex = angelloHelper.buildIndex($scope.statuses, 'name');
 
@@ -99,6 +117,7 @@ myModule.controller('MainCtrl', function($scope, storyModel, angelloModel, angel
 		$scope.currentStory = story;
 		$scope.currentStatus = $scope.statusesIndex[story.status];
 		$scope.currentType = $scope.typesIndex[story.type];
+		console.log(JSON.stringify(story));
 	};
 
 	
@@ -120,6 +139,7 @@ myModule.controller('MainCtrl', function($scope, storyModel, angelloModel, angel
 			reporter : "Pending",
 			assigne : "Pending"
 		});
+	
 	};
 
 	$scope.setCurrentStatus = function(status) {
