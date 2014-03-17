@@ -6,6 +6,27 @@ myModule.config(['$httpProvider', function($httpProvider) {
 }
 ]);
 
+
+myModule.directive('userstory', function() {
+	var linker = function (scope, element, attrs) {
+		element.mouseover(function() {
+			element.css({ 'opacity' : 0.9});
+		}).mouseout(function() {
+			element.css({ 'opacity' : 1.0});
+		});
+	};
+	
+	var controller = function ($scope) {
+		// Pending
+	};
+	
+	return {
+		restrict : 'A',
+		controller : controller,
+		link : linker
+	};
+});
+
 myModule.factory('angelloHelper', function() {
 	var buildIndex = function(source, property) {
 		var tempArray = [];
