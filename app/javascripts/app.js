@@ -33,16 +33,19 @@ myModule.directive('userstory', function(angelloModel) {
 
 
 
-myModule.directive('sortable', function () {
+myModule.directive('sortable', function (angelloModel) {
 	var linker = function (scope, element, attrs) {
 		var status = scope.status.name;
 		element.sortable({
 			items : 'li',
 			connectWith: '.list',
 			receive : function (event, ui) {
+				var prevScope = angular.element(ui.item.prev()).scope();
 				var curScope = angular.element(ui.item).scope();
 				scope.$apply(function() {
+					angelloModel.insertStoryAfter(curScope.story, prevScope.story);
 					curScope.story.status = status;
+					console.log("stories" + JSON.stringify(angelloModel.getStories()));
 				});
 			}
 		});
@@ -118,8 +121,16 @@ myModule.factory('angelloModel', function(storyModel) {
 		console.log('Delete story:' + id);
 	};
 	
+	var insertStoryAfter = function(story, prevStory) {
+		stories = stories.remove(function(t) {
+			return t['id'] == story.id;
+		});
+		stories = stories.add(story, stories.findIndex(prevStory) + 1);
+	};
+	
 	
 	return {
+		insertStoryAfter : insertStoryAfter,
 		getStories : getStories,
 		deleteStory : deleteStory,
 		getStatuses : getStatuses,
