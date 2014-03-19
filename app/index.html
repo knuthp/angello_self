@@ -8,9 +8,13 @@
 <script
 	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.js"></script>
 <script src="bower_components/sugar/release/sugar-full.development.js"></script>
-<script type="text/javascript" src="javascripts/app.js"></script>
 <script
 	src="bower_components/jquery-ui/ui/minified/jquery-ui.custom.min.js"></script>
+<script src="bower_components/flot/jquery.flot.js"></script>
+<script src="bower_components/flot/jquery.flot.categories.js"></script>
+
+<script type="text/javascript" src="javascripts/app.js"></script>
+
 
 <link
 	href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css"
@@ -39,7 +43,9 @@
 			class="icon-plus"></i> </a>
 
 
-		<div class="span6 body-content">
+
+
+		<div class="span3 body-content">
 			<h2>Story</h2>
 			<form class="form-horizontal">
 				<div class="control-group">
@@ -104,7 +110,24 @@
 				</div>
 			</form>
 		</div>
-	</div>
+		<div class="row">
+			<div id="">
+				<h3>User Stories by Status</h3>
+				<div class="chart-container">
+					<div chart class="chart-placeholder"
+						style="width: 400px; height: 200px;" source-array="stories"
+						source-prop="status" reference-array="statuses"
+						reference-prop="name">A</div>
+				</div>
+				<h3>User Stories by Types</h3>
+				<div class="demo-container">
+					<div chart class="demo-placeholder"
+						style="width: 400px; height: 200px;" source-array="stories"
+						source-prop="type" reference-array="types" reference-prop="name">.</div>
+				</div>
+			</div>
+		</div>
 
+	</div>
 </body>
 </html>

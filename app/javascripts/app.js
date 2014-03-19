@@ -1,28 +1,30 @@
-var myModule = angular.module('Angello', ['ngResource']);
+var myModule = angular.module('Angello', [ 'ngResource' ]);
 
-myModule.config(['$httpProvider', function($httpProvider) {
-    $httpProvider.defaults.useXDomain = true;
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
-}
-]);
-
+myModule.config([ '$httpProvider', function($httpProvider) {
+	$httpProvider.defaults.useXDomain = true;
+	delete $httpProvider.defaults.headers.common['X-Requested-With'];
+} ]);
 
 myModule.directive('userstory', function(angelloModel) {
-	var linker = function (scope, element, attrs) {
+	var linker = function(scope, element, attrs) {
 		element.mouseover(function() {
-			element.css({ 'opacity' : 0.9});
+			element.css({
+				'opacity' : 0.9
+			});
 		}).mouseout(function() {
-			element.css({ 'opacity' : 1.0});
+			element.css({
+				'opacity' : 1.0
+			});
 		});
 	};
-	
-	var controller = function ($scope) {
+
+	var controller = function($scope) {
 		$scope.deleteStory = function(id) {
 			console.log('Directive id: ' + id);
 			angelloModel.deleteStory(id);
 		};
 	};
-	
+
 	return {
 		restrict : 'A',
 		controller : controller,
@@ -30,22 +32,21 @@ myModule.directive('userstory', function(angelloModel) {
 	};
 });
 
-
-
-
-myModule.directive('sortable', function (angelloModel) {
-	var linker = function (scope, element, attrs) {
+myModule.directive('sortable', function(angelloModel) {
+	var linker = function(scope, element, attrs) {
 		var status = scope.status.name;
 		element.sortable({
 			items : 'li',
-			connectWith: '.list',
-			receive : function (event, ui) {
+			connectWith : '.list',
+			receive : function(event, ui) {
 				var prevScope = angular.element(ui.item.prev()).scope();
 				var curScope = angular.element(ui.item).scope();
 				scope.$apply(function() {
-					angelloModel.insertStoryAfter(curScope.story, prevScope.story);
+					angelloModel.insertStoryAfter(curScope.story,
+							prevScope.story);
 					curScope.story.status = status;
-					console.log("stories" + JSON.stringify(angelloModel.getStories()));
+					console.log("stories"
+							+ JSON.stringify(angelloModel.getStories()));
 				});
 			}
 		});
@@ -56,6 +57,61 @@ myModule.directive('sortable', function (angelloModel) {
 	};
 });
 
+myModule.directive('chart', function() {
+	var parseDataForCharts = function(sourceArray, sourceProp, referenceArray,
+			referenceProp) {
+		var data = [];
+		referenceArray.each(function(r) {
+			console.log("sourceProp=" + sourceProp + ", referenceProp="
+					+ referenceProp + ", r=" + JSON.stringify(r));
+			var count = sourceArray.count(function(s) {
+				return s[sourceProp] == r[referenceProp];
+			});
+			console.log("count=" + count);
+			data.push([ r[referenceProp], count ]);
+		});
+		return data;
+	};
+
+	var linker = function(scope, element, attrs) {
+		console.log("sourceArray" + JSON.stringify(scope.sourceArray));
+		scope.data = parseDataForCharts(scope.sourceArray, attrs['sourceProp'],
+				scope.referenceArray, attrs['referenceProp']);
+
+		if (element.is(":visible")) {
+			console.log("scope.data" + JSON.stringify(scope.data));
+			$.plot(element, [ {
+				data : scope.data
+			} ], {
+				series : {
+					bars : {
+						show : true,
+						barWidth : 0.6,
+						align : "center"
+					}
+				},
+				xaxis : {
+					mode : "categories",
+					tickLength : 0
+				}
+			});
+		}
+	};
+
+	var controller = function($scope) {
+
+	};
+
+	return {
+		restrict : 'A',
+		link : linker,
+		controller : controller,
+		scope : {
+			sourceArray : '=',
+			referenceArray : '='
+		}
+	};
+});
 
 myModule.factory('angelloHelper', function() {
 	var buildIndex = function(source, property) {
@@ -70,10 +126,9 @@ myModule.factory('angelloHelper', function() {
 	};
 });
 
-myModule.factory('storyModel', ['$resource', function ($resource){
+myModule.factory('storyModel', [ '$resource', function($resource) {
 	return $resource('http://127.0.0.1\\:4730/rest/story/:story');
-}]);
-
+} ]);
 
 myModule.factory('angelloModel', function(storyModel) {
 	var getStatuses = function() {
@@ -107,28 +162,86 @@ myModule.factory('angelloModel', function(storyModel) {
 		}, ];
 		return tempArray;
 	};
-	
+
 	var stories = storyModel.query();
 
+	// var getStories = function() {
+	// return stories;
+	// };
 	var getStories = function() {
-		return stories;
+		var tempArray = [ {
+			id : 0,
+			title : 'Story 00',
+			description : 'Description pending.',
+			criteria : 'Criteria pending.',
+			status : 'To Do',
+			type : 'Feature',
+			reporter : 'knuthp',
+			assignee : 'Gunhild'
+		}, {
+			id : 1,
+			title : 'Story 01',
+			description : 'Description pending.',
+			criteria : 'Criteria pending.',
+			status : 'To Do',
+			type : 'Feature',
+			reporter : 'knuthp',
+			assignee : 'Gunhild'
+		}, {
+			id : 2,
+			title : 'Story 02',
+			description : 'Description pending.',
+			criteria : 'Criteria pending.',
+			status : 'To Do',
+			type : 'Feature',
+			reporter : 'knuthp',
+			assignee : 'Gunhild'
+
+		}, {
+			id : 3,
+			title : 'Story 03',
+			description : 'Description pending.',
+			criteria : 'Criteria pending.',
+			status : 'To Do',
+			type : 'Feature',
+			reporter : 'knuthp',
+			assignee : 'Gunhild'
+		}, {
+			id : 4,
+			title : 'Story 04',
+			description : 'Description pending.',
+			criteria : 'Criteria pending.',
+			status : 'To Do',
+			type : 'Feature',
+			reporter : 'knuthp',
+			assignee : 'Gunhild'
+		}, {
+			id : 5,
+			title : 'Story 05',
+			description : 'Description pending.',
+			criteria : 'Criteria pending.',
+			status : 'To Do',
+			type : 'Feature',
+			reporter : 'knuthp',
+			assignee : 'Gunhild'
+		} ];
+		return tempArray;
 	};
-	
-	var deleteStory = function (id) {
+
+	var deleteStory = function(id) {
 		stories.remove(function(s) {
 			return s.id == id;
 		});
 		console.log('Delete story:' + id);
 	};
-	
+
 	var insertStoryAfter = function(story, prevStory) {
 		stories = stories.remove(function(t) {
 			return t['id'] == story.id;
 		});
 		stories = stories.add(story, stories.findIndex(prevStory) + 1);
 	};
-	
-	
+
 	return {
 		insertStoryAfter : insertStoryAfter,
 		getStories : getStories,
@@ -138,7 +251,8 @@ myModule.factory('angelloModel', function(storyModel) {
 	};
 });
 
-myModule.controller('MainCtrl', function($scope, storyModel, angelloModel, angelloHelper) {
+myModule.controller('MainCtrl', function($scope, storyModel, angelloModel,
+		angelloHelper) {
 	$scope.currentStory;
 	$scope.types = angelloModel.getTypes();
 	$scope.statuses = angelloModel.getStatuses();
@@ -146,21 +260,18 @@ myModule.controller('MainCtrl', function($scope, storyModel, angelloModel, angel
 	$scope.typesIndex = angelloHelper.buildIndex($scope.types, 'name');
 	$scope.statusesIndex = angelloHelper.buildIndex($scope.statuses, 'name');
 
-	
-	
 	$scope.setCurrentStory = function(story) {
 		$scope.currentStory = story;
 		$scope.currentStatus = $scope.statusesIndex[story.status];
 		$scope.currentType = $scope.typesIndex[story.type];
 	};
 
-	
 	$scope.save = function(story) {
 		storyModel.save(story, function(resp) {
-	        console.log("Response from POST: %j", resp);
+			console.log("Response from POST: %j", resp);
 		});
 		console.log(JSON.stringify(story));
-		
+
 	};
 
 	$scope.createStory = function() {
@@ -173,7 +284,7 @@ myModule.controller('MainCtrl', function($scope, storyModel, angelloModel, angel
 			reporter : "Pending",
 			assigne : "Pending"
 		});
-	
+
 	};
 
 	$scope.setCurrentStatus = function(status) {
