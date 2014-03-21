@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html ng-app='Angello'>
 <head>
 <script
@@ -13,7 +13,7 @@
 <script src="bower_components/flot/jquery.flot.js"></script>
 <script src="bower_components/flot/jquery.flot.categories.js"></script>
 
-<script type="text/javascript" src="javascripts/app.js"></script>
+<script type="text/javascript" src="scripts/app.js"></script>
 
 
 <link
@@ -24,110 +24,141 @@
 <title>Angello Lite</title>
 </head>
 <body>
-	<div ng-controller="MainCtrl">
-		<div class="span4 sidebar-content">
-			<h2>Stories</h2>
-			<ul class="list" sortable ng-repeat="status in statuses">
-				<h3>{{status.name}}</h3>
-				<li userstory class="story"
-					ng-repeat="story in stories | filter:status.name"
-					ng-click="setCurrentStory(story)">
-					<button type="button" class="close"
-						ng-click="deleteStory(story.id);">x</button>
-					<h4>{{story.title}}</h4>
-					<p>{{story.description}}</p>
-				</li>
-			</ul>
-		</div>
-		<br /> <a class="btn" ng-click="createStory()"><i
-			class="icon-plus"></i> </a>
 
-
-
-
-		<div class="span3 body-content">
-			<h2>Story</h2>
-			<form class="form-horizontal">
-				<div class="control-group">
-					<label class="control-label" for="inputTitle">Title</label>
-					<div class="controls">
-						<input type="text" placeholder="Title"
-							ng-model="currentStory.title">
-					</div>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="brand" href="#">Angello</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li class="active"><a href="#">Home</a></li>
+						<li><a href="#about">About</a></li>
+					</ul>
+					<form class="navbar-form pull-right">
+						<input class="span2" type="text" placeholder="Email"> <input
+							class="span2" type="password" placeholder="Password">
+						<button type="submit" class="btn">Sign in</button>
+					</form>
 				</div>
-				<div class="control-group">
-					<label class="control-label" for="inputStatus">Status</label>
-					<div class="controls">
-						<select id="inputStatus" ng-model="currentStatus"
-							ng-options="s.name for s in statuses"
-							ng-change="setCurrentStatus(currentStatus)"></select>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="inputType">Type</label>
-					<div class="controls">
-						<select id="inputType" ng-model="currentType"
-							ng-options="t.name for t in types"
-							ng-change="setCurrentType(currentType)"></select>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="inputDescription">Description</label>
-					<div class="controls">
-						<textarea id="inputDescription" rows="3"
-							ng-model="currentStory.description"></textarea>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="inputAcceptance">Acceptance
-						Criteria</label>
-					<div class="controls">
-						<textarea id="inputAcepptance" placeholder="Acceptance Criteria"
-							rows="3" ng-model="currentStory.criteria"></textarea>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="inputReporter">Acceptance
-						Criteria</label>
-					<div class="controls">
-						<textarea id="inputReporter" placeholder="Reporter" rows="3"
-							ng-model="currentStory.reporter"></textarea>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="inputAssignee">Acceptance
-						Criteria</label>
-					<div class="controls">
-						<textarea id="inputAssignee" placeholder="Assignee" rows="3"
-							ng-model="currentStory.assignee"></textarea>
-					</div>
-				</div>
-
-				<div class="form-actions">
-					<button type="submit" class="btn btn-primary"
-						ng-click="save(currentStory)">Save</button>
-					<button type="cancel" class="btn" ng-click="cancel()">Cancel</button>
-				</div>
-			</form>
-		</div>
-		<div class="row">
-			<div id="">
-				<h3>User Stories by Status</h3>
-				<div class="chart-container">
-					<div chart class="chart-placeholder"
-						style="width: 400px; height: 200px;" source-array="stories"
-						source-prop="status" reference-array="statuses"
-						reference-prop="name">A</div>
-				</div>
-				<h3>User Stories by Types</h3>
-				<div class="demo-container">
-					<div chart class="demo-placeholder"
-						style="width: 400px; height: 200px;" source-array="stories"
-						source-prop="type" reference-array="types" reference-prop="name">.</div>
-				</div>
+				<!--/.nav-collapse -->
 			</div>
 		</div>
+	</div>
 
+
+	<div class="container">
+		<h2>Stories</h2>
+		<div ng-controller="MainCtrl">
+			<div class="row">
+				<ul class="span1 list" sortable ng-repeat="status in statuses">
+					<h6>{{status.name}}</h6>
+					<li userstory class="story"
+						ng-repeat="story in stories | filter:status.name"
+						ng-click="setCurrentStory(story)">
+						<button type="button" class="close"
+							ng-click="deleteStory(story.id);">x</button>
+						<h5>{{story.title}}</h5>
+						<p>{{story.description}}</p>
+					</li>
+				</ul>
+				<br /> <a class="btn" ng-click="createStory()"><i
+					class="icon-plus"></i> </a>
+
+
+
+
+				<div class="span4 body-content">
+					<h2>Story</h2>
+					<form class="form-horizontal">
+						<div class="control-group">
+							<label class="control-label" for="inputTitle">Title</label>
+							<div class="controls">
+								<input type="text" placeholder="Title"
+									ng-model="currentStory.title">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="inputStatus">Status</label>
+							<div class="controls">
+								<select id="inputStatus" ng-model="currentStatus"
+									ng-options="s.name for s in statuses"
+									ng-change="setCurrentStatus(currentStatus)"></select>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="inputType">Type</label>
+							<div class="controls">
+								<select id="inputType" ng-model="currentType"
+									ng-options="t.name for t in types"
+									ng-change="setCurrentType(currentType)"></select>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="inputDescription">Description</label>
+							<div class="controls">
+								<textarea id="inputDescription" rows="3"
+									ng-model="currentStory.description"></textarea>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="inputAcceptance">Acceptance
+								Criteria</label>
+							<div class="controls">
+								<textarea id="inputAcepptance" placeholder="Acceptance Criteria"
+									rows="3" ng-model="currentStory.criteria"></textarea>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="inputReporter">Acceptance
+								Criteria</label>
+							<div class="controls">
+								<textarea id="inputReporter" placeholder="Reporter" rows="3"
+									ng-model="currentStory.reporter"></textarea>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="inputAssignee">Acceptance
+								Criteria</label>
+							<div class="controls">
+								<textarea id="inputAssignee" placeholder="Assignee" rows="3"
+									ng-model="currentStory.assignee"></textarea>
+							</div>
+						</div>
+
+						<div class="form-actions">
+							<button type="submit" class="btn btn-primary"
+								ng-click="save(currentStory)">Save</button>
+							<button type="cancel" class="btn" ng-click="cancel()">Cancel</button>
+						</div>
+					</form>
+				</div>
+				<div class="row">
+					<div class="span4">
+						<h3>User Stories by Status</h3>
+						<div class="chart-container">
+							<div chart class="chart-placeholder"
+								style="width: 400px; height: 200px;" source-array="stories"
+								source-prop="status" reference-array="statuses"
+								reference-prop="name">A</div>
+						</div>
+					</div>
+					<div class="span6">
+						<h3>User Stories by Types</h3>
+						<div class="chart-container">
+							<div chart class="chart-placeholder"
+								style="width: 400px; height: 200px;" source-array="stories"
+								source-prop="type" reference-array="types" reference-prop="name">.</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
 	</div>
 </body>
 </html>

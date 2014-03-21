@@ -174,7 +174,7 @@ myModule.factory('angelloModel', function(storyModel) {
 			title : 'Story 00',
 			description : 'Description pending.',
 			criteria : 'Criteria pending.',
-			status : 'To Do',
+			status : 'Back Log',
 			type : 'Feature',
 			reporter : 'knuthp',
 			assignee : 'Gunhild'
@@ -202,7 +202,7 @@ myModule.factory('angelloModel', function(storyModel) {
 			title : 'Story 03',
 			description : 'Description pending.',
 			criteria : 'Criteria pending.',
-			status : 'To Do',
+			status : 'In progress',
 			type : 'Feature',
 			reporter : 'knuthp',
 			assignee : 'Gunhild'
@@ -211,7 +211,7 @@ myModule.factory('angelloModel', function(storyModel) {
 			title : 'Story 04',
 			description : 'Description pending.',
 			criteria : 'Criteria pending.',
-			status : 'To Do',
+			status : 'Code Review',
 			type : 'Feature',
 			reporter : 'knuthp',
 			assignee : 'Gunhild'
@@ -220,10 +220,29 @@ myModule.factory('angelloModel', function(storyModel) {
 			title : 'Story 05',
 			description : 'Description pending.',
 			criteria : 'Criteria pending.',
-			status : 'To Do',
+			status : 'Verified',
 			type : 'Feature',
 			reporter : 'knuthp',
 			assignee : 'Gunhild'
+		}, {
+			id : 6,
+			title : 'Story 06',
+			description : 'Description pending.',
+			criteria : 'Criteria pending.',
+			status : 'Done',
+			type : 'Feature',
+			reporter : 'knuthp',
+			assignee : 'Gunhild'
+		}, {
+			id : 7,
+			title : 'Story 07',
+			description : 'Description pending.',
+			criteria : 'Criteria pending.',
+			status : 'Done',
+			type : 'Feature',
+			reporter : 'knuthp',
+			assignee : 'Gunhild'
+		}, {
 		} ];
 		return tempArray;
 	};
