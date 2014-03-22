@@ -55,27 +55,35 @@
 		<h2>Stories</h2>
 		<div ng-controller="MainCtrl">
 			<div class="row">
-				<ul class="span1 list" sortable ng-repeat="status in statuses">
-					<h6>{{status.name}}</h6>
-					<li userstory class="story"
-						ng-repeat="story in stories | filter:status.name"
-						ng-click="setCurrentStory(story)">
-						<button type="button" class="close"
-							ng-click="deleteStory(story.id);">x</button>
-						<h5>{{story.title}}</h5>
-						<p>{{story.description}}</p>
-					</li>
-				</ul>
+				<div class="span8">
+					<div class="row">
+						<ul class="span1 list" sortable ng-repeat="status in statuses">
+							<h6>{{status.name}}</h6>
+						</ul>
+					</div>
+					<div class="row">
+						<ul class="span1 list" sortable ng-repeat="status in statuses">
+							<li userstory class="story"
+								ng-repeat="story in stories | filter:status.name"
+								ng-click="setCurrentStory(story)">
+								<button type="button" class="close"
+									ng-click="deleteStory(story.id);">x</button>
+								<h5>{{story.title}}</h5>
+								<p>{{story.description}}</p>
+							</li>
+						</ul>
+					</div>
+				</div>
 				<br /> <a class="btn" ng-click="createStory()"><i
 					class="icon-plus"></i> </a>
 
 
 
 
-				<div class="span4 body-content">
+				<div class="span2">
 					<h2>Story</h2>
-					<form class="form-horizontal">
-						<div class="control-group">
+					<form class="">
+						<div class="">
 							<label class="control-label" for="inputTitle">Title</label>
 							<div class="controls">
 								<input type="text" placeholder="Title"
@@ -130,35 +138,35 @@
 							</div>
 						</div>
 
-						<div class="form-actions">
+						<div class="btn-group">
 							<button type="submit" class="btn btn-primary"
 								ng-click="save(currentStory)">Save</button>
 							<button type="cancel" class="btn" ng-click="cancel()">Cancel</button>
 						</div>
 					</form>
 				</div>
-				<div class="row">
-					<div class="span4">
-						<h3>User Stories by Status</h3>
-						<div class="chart-container">
-							<div chart class="chart-placeholder"
-								style="width: 400px; height: 200px;" source-array="stories"
-								source-prop="status" reference-array="statuses"
-								reference-prop="name">A</div>
-						</div>
+			</div>
+			<div class="row">
+				<div class="span6">
+					<h3>User Stories by Status</h3>
+					<div class="chart-container">
+						<div chart class="chart-placeholder"
+							style="width: 400px; height: 200px;" source-array="stories"
+							source-prop="status" reference-array="statuses"
+							reference-prop="name"></div>
 					</div>
-					<div class="span6">
-						<h3>User Stories by Types</h3>
-						<div class="chart-container">
-							<div chart class="chart-placeholder"
-								style="width: 400px; height: 200px;" source-array="stories"
-								source-prop="type" reference-array="types" reference-prop="name">.</div>
-						</div>
+				</div>
+				<div class="span6">
+					<h3>User Stories by Types</h3>
+					<div class="chart-container">
+						<div chart class="chart-placeholder"
+							style="width: 400px; height: 200px;" source-array="stories"
+							source-prop="type" reference-array="types" reference-prop="name"></div>
 					</div>
 				</div>
 			</div>
-
 		</div>
+
 	</div>
 </body>
 </html>
