@@ -4,9 +4,9 @@
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script
-	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
 <script
-	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular-resource.js"></script>
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-resource.js"></script>
 <script src="bower_components/sugar/release/sugar-full.development.js"></script>
 <script
 	src="bower_components/jquery-ui/ui/minified/jquery-ui.custom.min.js"></script>
@@ -122,19 +122,17 @@
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label" for="inputReporter">Acceptance
-								Criteria</label>
+							<label class="control-label" for="inputReporter">Reporter</label>
 							<div class="controls">
-								<textarea id="inputReporter" placeholder="Reporter" rows="3"
-									ng-model="currentStory.reporter"></textarea>
+								<input type="text" id="inputReporter" placeholder="Reporter" rows="3"
+									ng-model="currentStory.reporter"></input>
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label" for="inputAssignee">Acceptance
-								Criteria</label>
+							<label class="control-label" for="inputAssignee">Assignee</label>
 							<div class="controls">
-								<textarea id="inputAssignee" placeholder="Assignee" rows="3"
-									ng-model="currentStory.assignee"></textarea>
+								<input type="text" id="inputAssignee" placeholder="Assignee" rows="3"
+									ng-model="currentStory.assignee"></input>
 							</div>
 						</div>
 
