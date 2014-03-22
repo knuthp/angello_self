@@ -1,4 +1,4 @@
-var myModule = angular.module('Angello', [ 'ngResource' ]);
+var myModule = angular.module('Angello', [ 'ngResource', 'ngAnimate' ]);
 
 myModule.config([ '$httpProvider', function($httpProvider) {
 	$httpProvider.defaults.useXDomain = true;
@@ -71,7 +71,7 @@ myModule.directive('chart', function() {
 		scope.data = parseDataForCharts(scope.sourceArray, attrs['sourceProp'],
 				scope.referenceArray, attrs['referenceProp']);
 
-		if (element.is(":visible")) {
+		if (element.is(':visible')) {
 			$.plot(element, [ {
 				data : scope.data
 			} ], {
@@ -79,11 +79,11 @@ myModule.directive('chart', function() {
 					bars : {
 						show : true,
 						barWidth : 0.6,
-						align : "center"
+						align : 'center'
 					}
 				},
 				xaxis : {
-					mode : "categories",
+					mode : 'categories',
 					tickLength : 0
 				}
 			});
@@ -279,7 +279,7 @@ myModule.controller('MainCtrl', function($scope, storyModel, angelloModel,
 
 	$scope.save = function(story) {
 		storyModel.save(story, function(resp) {
-			console.log("Response from POST: %j", resp);
+			console.log('Response from POST: %j', resp);
 		});
 		console.log(JSON.stringify(story));
 
@@ -287,13 +287,13 @@ myModule.controller('MainCtrl', function($scope, storyModel, angelloModel,
 
 	$scope.createStory = function() {
 		$scope.stories.push({
-			title : "New Story",
-			description : "Description pending.",
-			criteria : "Criteria pending",
-			status : "Back Log",
-			type : "Feature",
-			reporter : "Pending",
-			assigne : "Pending"
+			title : 'New Story',
+			description : 'Description pending.',
+			criteria : 'Criteria pending',
+			status : 'Back Log',
+			type : 'Feature',
+			reporter : 'Pending',
+			assigne : 'Pending'
 		});
 
 	};
@@ -308,6 +308,12 @@ myModule.controller('MainCtrl', function($scope, storyModel, angelloModel,
 		if (typeof $scope.currentStory !== 'undefined') {
 			$scope.currentStory.type = type.name;
 		}
+	};
+	
+	
+	$scope.detailsVisible = true;
+	$scope.setDetailsVisible = function(visible) {
+		$scope.detailsVisible = visible;
 	};
 
 });
