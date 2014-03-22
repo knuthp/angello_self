@@ -63,130 +63,131 @@
 				<div class="span8">
 					<div class="row">
 						<div class="span10">
-							<div class="list-area">
-								<div class="list-wrapper">
-									<ul class="list my-repeat-animation" sortable
-										ng-repeat="status in statuses">
-										<h6>{{status.name}}</h6>
-										<hr />
-										<li userstory class="story my-repeat-animation"
-											ng-repeat="story in stories | filter:status.name"
-											ng-click="setCurrentStory(story)">
-											<button type="button" class="close"
-												ng-click="deleteStory(story.id);">x</button>
-											<h5>{{story.title}}</h5>
-											<p>{{story.description}}</p>
-										</li>
-									</ul>
-								</div>
-							</div>
+							<ul class="span1 list" sortable ng-repeat="status in statuses">
+								<h6>{{status.name}}</h6>
+							</ul>
 						</div>
-					</div>
-					<div class="row">
-						<br /> <a class="btn" ng-click="createStory()"><i
-							class="icon-plus"></i> </a>
-						<div class="details span2">
-							<div class="details-nav">
-								<div ng-if="!detailsVisible">
-									<button class="btn pull-left"
-										ng-click="setDetailsVisible(true)">
-										<i class="icon-chevron-left"></i>
-									</button>
-								</div>
-								<div ng-if="detailsVisible">
-									<button class="btn pull-right"
-										ng-click="setDetailsVisible(false)">
-										<i class="icon-chevron-right"></i>
-									</button>
-								</div>
-							</div>
-							<div ng-if="detailsVisible" class="my-fade-animation">
-								<h2>Story</h2>
-								<form class="">
-									<div class="">
-										<label class="control-label" for="inputTitle">Title</label>
-										<div class="controls">
-											<input type="text" placeholder="Title"
-												ng-model="currentStory.title">
-										</div>
-									</div>
-									<div class="control-group">
-										<label class="control-label" for="inputStatus">Status</label>
-										<div class="controls">
-											<select id="inputStatus" ng-model="currentStatus"
-												ng-options="s.name for s in statuses"
-												ng-change="setCurrentStatus(currentStatus)"></select>
-										</div>
-									</div>
-									<div class="control-group">
-										<label class="control-label" for="inputType">Type</label>
-										<div class="controls">
-											<select id="inputType" ng-model="currentType"
-												ng-options="t.name for t in types"
-												ng-change="setCurrentType(currentType)"></select>
-										</div>
-									</div>
-									<div class="control-group">
-										<label class="control-label" for="inputDescription">Description</label>
-										<div class="controls">
-											<textarea id="inputDescription" rows="3"
-												ng-model="currentStory.description"></textarea>
-										</div>
-									</div>
-									<div class="control-group">
-										<label class="control-label" for="inputAcceptance">Acceptance
-											Criteria</label>
-										<div class="controls">
-											<textarea id="inputAcepptance"
-												placeholder="Acceptance Criteria" rows="3"
-												ng-model="currentStory.criteria"></textarea>
-										</div>
-									</div>
-									<div class="control-group">
-										<label class="control-label" for="inputReporter">Reporter</label>
-										<div class="controls">
-											<input type="text" id="inputReporter" placeholder="Reporter"
-												rows="3" ng-model="currentStory.reporter"></input>
-										</div>
-									</div>
-									<div class="control-group">
-										<label class="control-label" for="inputAssignee">Assignee</label>
-										<div class="controls">
-											<input type="text" id="inputAssignee" placeholder="Assignee"
-												rows="3" ng-model="currentStory.assignee"></input>
-										</div>
-									</div>
-
-									<div class="btn-group">
-										<button type="submit" class="btn btn-primary"
-											ng-click="save(currentStory)">Save</button>
-										<button type="cancel" class="btn" ng-click="cancel()">Cancel</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="span6">
-							<h3>User Stories by Status</h3>
-							<div class="chart-container">
-								<div chart class="chart-placeholder"
-									style="width: 400px; height: 200px;" source-array="stories"
-									source-prop="status" reference-array="statuses"
-									reference-prop="name"></div>
-							</div>
-						</div>
-						<div class="span6">
-							<h3>User Stories by Types</h3>
-							<div class="chart-container">
-								<div chart class="chart-placeholder"
-									style="width: 400px; height: 200px;" source-array="stories"
-									source-prop="type" reference-array="types"
-									reference-prop="name"></div>
-							</div>
+						<div class="row">
+							<ul class="span1 list my-repeat-animation" sortable
+								ng-repeat="status in statuses">
+								<li userstory class="story my-repeat-animation"
+									ng-repeat="story in stories | filter:status.name"
+									ng-click="setCurrentStory(story)">
+									<button type="button" class="close"
+										ng-click="deleteStory(story.id);">x</button>
+									<h5>{{story.title}}</h5>
+									<p>{{story.description}}</p>
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
+				<br /> <a class="btn" ng-click="createStory()"><i
+					class="icon-plus"></i> </a>
+
+
+
+
+				<div class="details span2">
+					<div class="details-nav">
+						<div ng-if="!detailsVisible">
+							<button class="btn pull-left" ng-click="setDetailsVisible(true)">
+								<i class="icon-chevron-left"></i>
+							</button>
+						</div>
+						<div ng-if="detailsVisible">
+							<button class="btn pull-right"
+								ng-click="setDetailsVisible(false)">
+								<i class="icon-chevron-right"></i>
+							</button>
+						</div>
+					</div>
+					<div ng-if="detailsVisible" class="my-fade-animation">
+						<h2>Story</h2>
+						<form class="">
+							<div class="">
+								<label class="control-label" for="inputTitle">Title</label>
+								<div class="controls">
+									<input type="text" placeholder="Title"
+										ng-model="currentStory.title">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="inputStatus">Status</label>
+								<div class="controls">
+									<select id="inputStatus" ng-model="currentStatus"
+										ng-options="s.name for s in statuses"
+										ng-change="setCurrentStatus(currentStatus)"></select>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="inputType">Type</label>
+								<div class="controls">
+									<select id="inputType" ng-model="currentType"
+										ng-options="t.name for t in types"
+										ng-change="setCurrentType(currentType)"></select>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="inputDescription">Description</label>
+								<div class="controls">
+									<textarea id="inputDescription" rows="3"
+										ng-model="currentStory.description"></textarea>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="inputAcceptance">Acceptance
+									Criteria</label>
+								<div class="controls">
+									<textarea id="inputAcepptance"
+										placeholder="Acceptance Criteria" rows="3"
+										ng-model="currentStory.criteria"></textarea>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="inputReporter">Reporter</label>
+								<div class="controls">
+									<input type="text" id="inputReporter" placeholder="Reporter"
+										rows="3" ng-model="currentStory.reporter"></input>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="inputAssignee">Assignee</label>
+								<div class="controls">
+									<input type="text" id="inputAssignee" placeholder="Assignee"
+										rows="3" ng-model="currentStory.assignee"></input>
+								</div>
+							</div>
+
+							<div class="btn-group">
+								<button type="submit" class="btn btn-primary"
+									ng-click="save(currentStory)">Save</button>
+								<button type="cancel" class="btn" ng-click="cancel()">Cancel</button>
+							</div>
+						</form>
+					</div>
+				</div>
 			</div>
+			<div class="row">
+				<div class="span6">
+					<h3>User Stories by Status</h3>
+					<div class="chart-container">
+						<div chart class="chart-placeholder"
+							style="width: 400px; height: 200px;" source-array="stories"
+							source-prop="status" reference-array="statuses"
+							reference-prop="name"></div>
+					</div>
+				</div>
+				<div class="span6">
+					<h3>User Stories by Types</h3>
+					<div class="chart-container">
+						<div chart class="chart-placeholder"
+							style="width: 400px; height: 200px;" source-array="stories"
+							source-prop="type" reference-array="types" reference-prop="name"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
