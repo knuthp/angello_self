@@ -20,7 +20,6 @@ myModule.directive('userstory', function(angelloModel) {
 
 	var controller = function($scope) {
 		$scope.deleteStory = function(id) {
-			console.log('Directive id: ' + id);
 			angelloModel.deleteStory(id);
 		};
 	};
@@ -45,8 +44,6 @@ myModule.directive('sortable', function(angelloModel) {
 					angelloModel.insertStoryAfter(curScope.story,
 							prevScope.story);
 					curScope.story.status = status;
-					console.log("stories"
-							+ JSON.stringify(angelloModel.getStories()));
 				});
 			}
 		});
@@ -62,24 +59,19 @@ myModule.directive('chart', function() {
 			referenceProp) {
 		var data = [];
 		referenceArray.each(function(r) {
-			console.log("sourceProp=" + sourceProp + ", referenceProp="
-					+ referenceProp + ", r=" + JSON.stringify(r));
 			var count = sourceArray.count(function(s) {
 				return s[sourceProp] == r[referenceProp];
 			});
-			console.log("count=" + count);
 			data.push([ r[referenceProp], count ]);
 		});
 		return data;
 	};
 
 	var linker = function(scope, element, attrs) {
-		console.log("sourceArray" + JSON.stringify(scope.sourceArray));
 		scope.data = parseDataForCharts(scope.sourceArray, attrs['sourceProp'],
 				scope.referenceArray, attrs['referenceProp']);
 
 		if (element.is(":visible")) {
-			console.log("scope.data" + JSON.stringify(scope.data));
 			$.plot(element, [ {
 				data : scope.data
 			} ], {
