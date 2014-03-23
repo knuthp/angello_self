@@ -4,6 +4,16 @@
 	cursor: pointer;
 }
 
+
+/* Form validation styling */
+input.ng-invalid {
+	border: 1px solid #B02B2C;
+}
+
+input.ng-valid {
+	border: 1px solid #6BBA70;
+}
+
 /* css/animations.css */
 .my-fade-animation.ng-enter,.my-fade-animation.ng-leave {
 	-webkit-transition: 0.5s linear all;

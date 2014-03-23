@@ -289,7 +289,7 @@ myModule.controller('MainCtrl', function($scope, storyModel, angelloModel,
 	};
 
 	$scope.createStory = function() {
-		$scope.stories.push({
+		var curIndex = $scope.stories.push({
 			title : 'New Story',
 			description : 'Description pending.',
 			criteria : 'Criteria pending',
@@ -298,8 +298,20 @@ myModule.controller('MainCtrl', function($scope, storyModel, angelloModel,
 			reporter : 'Pending',
 			assigne : 'Pending'
 		});
+		$scope.setCurrentStory($scope.stories[curIndex - 1]);
 
 	};
+	
+	
+	$scope.resetForm = function() {
+		$scope.currentStory = null;
+		$scope.currentStatus = null;
+		$scope.currentType = null;
+		$scope.editedStory = {};
+		
+		$scope.detailsForm.$setPristine();
+	};
+	
 
 	$scope.setCurrentStatus = function(status) {
 		if (typeof $scope.currentStory !== 'undefined') {
