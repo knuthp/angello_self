@@ -105,6 +105,10 @@ myModule.directive('chart', function() {
 	};
 });
 
+myModule.animation('.details-animation', function() {
+	// Code omitted
+});
+
 myModule.factory('angelloHelper', function() {
 	var buildIndex = function(source, property) {
 		var tempArray = [];
@@ -234,8 +238,7 @@ myModule.factory('angelloModel', function(storyModel) {
 			type : 'Feature',
 			reporter : 'knuthp',
 			assignee : 'Gunhild'
-		}, {
-		} ];
+		}, {} ];
 		return tempArray;
 	};
 
@@ -309,8 +312,7 @@ myModule.controller('MainCtrl', function($scope, storyModel, angelloModel,
 			$scope.currentStory.type = type.name;
 		}
 	};
-	
-	
+
 	$scope.detailsVisible = true;
 	$scope.setDetailsVisible = function(visible) {
 		$scope.detailsVisible = visible;
