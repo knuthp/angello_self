@@ -166,87 +166,11 @@ myModule.factory('angelloModel', function(storyModel) {
 
 
 	
+	var stories = [];
+	storyModel.getStories().success(function(data, status) {
+		stories = data;
+	});
 	
-	// var getStories = function() {
-	// return stories;
-	// };
-	var getStories = function() {
-		var tempArray = [ {
-			id : 0,
-			title : 'Story 00',
-			description : 'Description pending.',
-			criteria : 'Criteria pending.',
-			status : 'Back Log',
-			type : 'Feature',
-			reporter : 'knuthp',
-			assignee : 'Gunhild'
-		}, {
-			id : 1,
-			title : 'Story 01',
-			description : 'Description pending.',
-			criteria : 'Criteria pending.',
-			status : 'To Do',
-			type : 'Feature',
-			reporter : 'knuthp',
-			assignee : 'Gunhild'
-		}, {
-			id : 2,
-			title : 'Story 02',
-			description : 'Description pending.',
-			criteria : 'Criteria pending.',
-			status : 'To Do',
-			type : 'Feature',
-			reporter : 'knuthp',
-			assignee : 'Gunhild'
-
-		}, {
-			id : 3,
-			title : 'Story 03',
-			description : 'Description pending.',
-			criteria : 'Criteria pending.',
-			status : 'In progress',
-			type : 'Feature',
-			reporter : 'knuthp',
-			assignee : 'Gunhild'
-		}, {
-			id : 4,
-			title : 'Story 04',
-			description : 'Description pending.',
-			criteria : 'Criteria pending.',
-			status : 'Code Review',
-			type : 'Feature',
-			reporter : 'knuthp',
-			assignee : 'Gunhild'
-		}, {
-			id : 5,
-			title : 'Story 05',
-			description : 'Description pending.',
-			criteria : 'Criteria pending.',
-			status : 'Verified',
-			type : 'Feature',
-			reporter : 'knuthp',
-			assignee : 'Gunhild'
-		}, {
-			id : 6,
-			title : 'Story 06',
-			description : 'Description pending.',
-			criteria : 'Criteria pending.',
-			status : 'Done',
-			type : 'Feature',
-			reporter : 'knuthp',
-			assignee : 'Gunhild'
-		}, {
-			id : 7,
-			title : 'Story 07',
-			description : 'Description pending.',
-			criteria : 'Criteria pending.',
-			status : 'Done',
-			type : 'Feature',
-			reporter : 'knuthp',
-			assignee : 'Gunhild'
-		}, {} ];
-		return tempArray;
-	};
 
 	var deleteStory = function(id) {
 		stories.remove(function(s) {
@@ -264,7 +188,7 @@ myModule.factory('angelloModel', function(storyModel) {
 
 	return {
 		insertStoryAfter : insertStoryAfter,
-		getStories : getStories,
+		stories : stories,
 		deleteStory : deleteStory,
 		getStatuses : getStatuses,
 		getTypes : getTypes,
@@ -276,7 +200,7 @@ myModule.controller('MainCtrl', function($scope, storyModel, angelloModel,
 	$scope.currentStory;
 	$scope.types = angelloModel.getTypes();
 	$scope.statuses = angelloModel.getStatuses();
-	$scope.stories = []; 
+	$scope.stories = angelloModel.stories; 
 	storyModel.getStories().success(function(data, status) {
 		$scope.stories = data;
 	});
