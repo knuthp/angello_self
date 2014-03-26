@@ -122,9 +122,14 @@ myModule.factory('angelloHelper', function() {
 	};
 });
 
-myModule.factory('storyModel', [ '$resource', function($resource) {
-	return $resource('http://127.0.0.1\\:4730/rest/story/:story');
-} ]);
+myModule.factory('storyModel', function($http) {
+	return {
+		getStories : function() {
+			console.log("Returning promise http");
+			return $http.get('http://127.0.0.1:4730/rest/story');
+		}
+	};
+});
 
 myModule.factory('angelloModel', function(storyModel) {
 	var getStatuses = function() {
@@ -159,8 +164,9 @@ myModule.factory('angelloModel', function(storyModel) {
 		return tempArray;
 	};
 
-	var stories = storyModel.query();
 
+	
+	
 	// var getStories = function() {
 	// return stories;
 	// };
@@ -270,7 +276,13 @@ myModule.controller('MainCtrl', function($scope, storyModel, angelloModel,
 	$scope.currentStory;
 	$scope.types = angelloModel.getTypes();
 	$scope.statuses = angelloModel.getStatuses();
-	$scope.stories = angelloModel.getStories();
+	$scope.stories = []; 
+	storyModel.getStories().success(function(data, status) {
+		$scope.stories = data;
+	});
+			
+			
+
 	$scope.typesIndex = angelloHelper.buildIndex($scope.types, 'name');
 	$scope.statusesIndex = angelloHelper.buildIndex($scope.statuses, 'name');
 
